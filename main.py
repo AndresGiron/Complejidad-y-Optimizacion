@@ -1,4 +1,7 @@
 import PySimpleGUI as sg
+from Minizinc import minizinc
+
+cantidad = 0
 
 layout = [
     [sg.Text("Cantidad de noticias"),sg.InputText(key="cantidad"),sg.Button("Agregar")]
@@ -13,6 +16,7 @@ while True:
     if event in (sg.WINDOW_CLOSED,"Exit"):
         break
     if event == "Agregar":
+        #cantidad = int (values['cantidad'])
         for i in range(0,int(values['cantidad'])):
             print(i)
             
@@ -21,9 +25,13 @@ while True:
             sg.Text("Paginas maximas"),sg.InputText(key="max"+str(i),size=(5,10)),
             sg.Text("Lectores potenciales"),sg.InputText(key="readers"+str(i),size=(10,10))]])
 
+        window.extend_layout(window,[[sg.Text("Cantidad Maxima de paginas de la publicacion"),sg.InputText(key="PagsArticulo",size=(20,10))]])
         window.extend_layout(window,[[sg.Button("Optimizar")]])
         window["Agregar"].update(disabled=True)
         window.refresh()
+    if event == "Optimizar":
+        minizinc(cantidad,values)
+
 
 
 
