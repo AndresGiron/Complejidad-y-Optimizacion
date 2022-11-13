@@ -30,7 +30,7 @@ while True:
         window["Agregar"].update(disabled=True)
         window.refresh()
     if event == "Optimizar":
-        minizinc(cantidad,values)
+        minizinc(values)
 
 
 
