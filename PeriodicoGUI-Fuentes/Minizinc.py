@@ -30,7 +30,7 @@ def minizinzFunction(values):
     folder = minizinc.Model("../ModeloProyecto.mzn")
     folder.add_file("../datos.dzn")
     
-    v26: Driver = Driver.find(["/home/gyron/Desktop/Programas/MiniZincIDE 2.6.4/bin"])
+    v26: Driver = Driver.find(["../MiniZincIDE 2.6.4/bin"])
     chuffed = Solver.lookup("chuffed", driver=v26)
     v26_instance = Instance(chuffed, driver=v26)
     v26.make_default()
