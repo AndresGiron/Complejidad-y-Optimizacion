@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from Minizinc import minizinc
+from Minizinc import minizinzFunction
 
 cantidad = 0
 
@@ -30,7 +30,14 @@ while True:
         window["Agregar"].update(disabled=True)
         window.refresh()
     if event == "Optimizar":
-        minizinc(values)
+        result = minizinzFunction(values)
+        texto = []
+        for i in range(0,len(result[0])):
+            texto.append(sg.Text(values['tipo'+str(i)] + ' = ' +str(result[0][i])))
+        window.extend_layout(window,[[sg.Text("Paginas por tipo de noticia")]])
+        window.extend_layout(window, [texto])
+        window.extend_layout(window,[[sg.Text("Lectores potenciales totales")]])
+        window.extend_layout(window,[[sg.Text(str(result[1]))]])
 
 
 window.close()
