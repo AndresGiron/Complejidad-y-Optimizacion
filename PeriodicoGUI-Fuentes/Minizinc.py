@@ -1,5 +1,6 @@
-import subprocess
+
 import minizinc
+from minizinc import Driver, Instance, Solver, default_driver
 import pymzn
 def minizinzFunction(values):
     cat = int(values['cantidad'])
@@ -29,12 +30,16 @@ def minizinzFunction(values):
     folder = minizinc.Model("../ModeloProyecto.mzn")
     folder.add_file("../datos.dzn")
     
+    v26: Driver = Driver.find(["/home/gyron/Desktop/Programas/MiniZincIDE 2.6.4/bin"])
+    chuffed = Solver.lookup("chuffed", driver=v26)
+    v26_instance = Instance(chuffed, driver=v26)
+    v26.make_default()
 
-    chuffed = minizinc.Solver.lookup("gecode")
+    chuffed = minizinc.Solver.lookup("chuffed")
     instance = minizinc.Instance(chuffed, folder)
 
     result = instance.solve()
-    print(result)
+    print(result.solution)
 
 
 
